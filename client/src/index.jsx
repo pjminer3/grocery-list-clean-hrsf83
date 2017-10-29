@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AddGrocery from './components/AddGrocery.jsx'
+import GroceryItem from './components/GroceryItem.jsx'
+import GroceryList from './components/GroceryList.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,10 +16,28 @@ class App extends React.Component {
       ]
     }
   }
+  
+  increaseQ () {
+    // increase the quantity of an item by 1
+  }
+  
+  decreaseQ () {
+    // decrease teh quanity of an item by 1
+    // if item's new quantity is 0 => remove item
+  }
 
   
   render () {
-    return null;
+    return (
+    <div>
+      <div id="addGrocery">
+        <AddGrocery />
+      </div>
+        <div id="groceryList">
+          <GroceryList list={this.state.list}/>
+        </div>
+    </div>
+    )
   }
 }
 
