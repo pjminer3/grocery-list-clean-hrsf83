@@ -17,45 +17,43 @@ class App extends React.Component {
     }
     
     this.increaseQ = this.increaseQ.bind(this);
+    this.decreaseQ = this.decreaseQ.bind(this);
+    this.remove = this.remove.bind(this);
   }
   
   increaseQ (itemId) {
     //increase the quantity of an item by 1
-    
     var list = this.state.list;
-    
     var newList = list.map((item) => {
-        if (item.id !== itemId) {
-          return item;
-        } else {
-          item.quantity = item.quantity + 1;
-          return item; 
-        }
-      });
-    
+      if (item.id !== itemId) {
+        return item;
+      } else {
+        item.quantity = item.quantity + 1;
+        return item; 
+      }
+    });
     this.setState({list: newList});
-    
-    // this.setState({list: 
-    //   this.state.list.map(item => {
-    //     if (item[id] !== item[id]) {
-    //       return item;
-    //     } else {
-    //       for (var key in item) {
-    //         if (item.key === itemId) {
-    //           item[key] = item[key] + 1;
-    //         }
-    //       } 
-    //       return item; 
-    //     }
-    //   });
-    // });
-    console.log('increase works', itemId, newList);
   }
   
   decreaseQ (itemId) {
-    console.log('decrease works', itemId);
-    // decrease teh quanity of an item by 1
-    // if item's new quantity is 0 => remove item
+    var list = this.state.list;
+    var newList = list.map((item) => {
+      if (item.id !== itemId) {
+        return item;
+      } else {
+        item.quantity = item.quantity - 1;
+        if (item.quantity === 0) {
+          // LAUNCH REMOVE FUNCTION
+        }
+        return item; 
+      }
+    });
+    
+    this.setState({list: newList});
+  }
+  
+  remove (event) {
+    console.log('remove event triggered', event);
   }
   
   addItem (itemName) {
@@ -70,7 +68,12 @@ class App extends React.Component {
         <AddGrocery />
       </div>
         <div id="groceryList">
-          <GroceryList list={this.state.list} increaseQ={this.increaseQ} decreaseQ={this.decreaseQ}/>
+          <GroceryList 
+          list={this.state.list} 
+          increaseQ={this.increaseQ} 
+          decreaseQ={this.decreaseQ}
+          remove={this.remove}
+          />
         </div>
     </div>
     )
