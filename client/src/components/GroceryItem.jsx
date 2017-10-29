@@ -1,11 +1,11 @@
 import React from 'react';
 
-const GroceryItem = ({item}) => (
+const GroceryItem = (props) => (
   <div className="listItem">
     {/* We   want idx, name, and Quantity */}
-    {item.id}. {item.description}: {item.quantity}  
-    <button className="increaseQ">+</button>
-    <button className="decreaseQ">-</button>
+    {props.item.id}. {props.item.description}: {props.item.quantity}  
+    <button className="increaseQ" onClick={() => {props.increaseQ(props.item.id)} }>+</button>
+    <button className="decreaseQ" onClick={() => {props.decreaseQ(props.item.id)} }>-</button>
   </div>
 )
 
