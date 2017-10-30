@@ -19,6 +19,7 @@ class App extends React.Component {
     this.increaseQ = this.increaseQ.bind(this);
     this.decreaseQ = this.decreaseQ.bind(this);
     this.remove = this.remove.bind(this);
+    this.addItem = this.addItem.bind(this);
   }
   
   increaseQ (itemId) {
@@ -42,14 +43,20 @@ class App extends React.Component {
         return item;
       } else {
         item.quantity = item.quantity - 1;
-        if (item.quantity === 0) {
-          // LAUNCH REMOVE FUNCTION
-        }
         return item; 
       }
     });
     
+    
+    
     this.setState({list: newList});
+    
+    newList.forEach(item => {
+      if (item.quantity < 1) {
+        this.remove(item);
+      }
+    })
+  
   }
   
   remove (removedItem) {
@@ -72,7 +79,13 @@ class App extends React.Component {
   
   addItem (itemName) {
     // add new item to list, set default quanity to 1
-    console.log()
+    var newList = this.state.list;
+    var currID = newList.length;
+    newList.push({id: currID + 1, quantity: 1, description: itemName});
+    
+    this.setState({list: newList});
+    
+    console.log('I got add item button to work', itemName)
   }
 
   
@@ -80,14 +93,16 @@ class App extends React.Component {
     return (
     <div>
       <div id="addGrocery">
-        <AddGrocery />
+        <AddGrocery 
+          addItem={this.addItem}
+        />
       </div>
         <div id="groceryList">
           <GroceryList 
-          list={this.state.list} 
-          increaseQ={this.increaseQ} 
-          decreaseQ={this.decreaseQ}
-          remove={this.remove}
+            list={this.state.list} 
+            increaseQ={this.increaseQ} 
+            decreaseQ={this.decreaseQ}
+            remove={this.remove}
           />
         </div>
     </div>

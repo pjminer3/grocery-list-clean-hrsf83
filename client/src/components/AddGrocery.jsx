@@ -13,11 +13,11 @@ class AddGrocery extends React.Component {
       <div className="addGrocery">
         <h3>Add Grocery Item: </h3>
         <input id="groceryInput" />
-        <button>Submit</button>
+        <button onClick={() => {this.props.addItem(document.getElementById('groceryInput').value)}}>Submit</button>
       </div>
     ) 
   }
 }
 
-export default AddGrocery;
+export default AddGrocery; 
 
