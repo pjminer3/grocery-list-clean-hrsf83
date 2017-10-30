@@ -52,12 +52,27 @@ class App extends React.Component {
     this.setState({list: newList});
   }
   
-  remove (event) {
+  remove (removedItem) {
     console.log('remove event triggered', event);
+    var objId = removedItem.id;
+    var list = this.state.list;
+    var newList = list.filter((object) => {
+      return object.id !== removedItem.id;
+    });
+    
+    newList = newList.map((item) => {
+      if (item.id > objId) {
+        item.id = item.id - 1;
+      }
+      return item;
+    })
+    
+    this.setState({list: newList});
   }
   
   addItem (itemName) {
     // add new item to list, set default quanity to 1
+    console.log()
   }
 
   
